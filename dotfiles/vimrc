@@ -1,0 +1,374 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Leader
+let mapleader = ","     " This can be modified as you chose (defaul is '\')
+
+set nocompatible	" Use Vim defaults instead of 100% vi compatibility
+set backspace=indent,eol,start	" more powerful backspacing
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Lines and dimensions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set cursorline
+set cursorcolumn
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+" Configure line numbers
+set number			" Turn line numbers on
+"set rnu			" Use relative line numbers
+
+" Always show tabline on top
+set showtabline=2
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf8
+
+" for the dark version
+set background=dark
+set mouse=a
+
+" for the light version
+" set background=light " for the light version
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Files
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Backup use git, no swap files
+set nobackup
+set nowb
+set noswapfile
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Linebreak on 500 characters
+set lbr
+set tw=120
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+" Custom tab behavior for different file formats
+autocmd FileType robot          setlocal shiftwidth=8 softtabstop=8 tabstop=8 noexpandtab
+autocmd FileType c,cpp          setlocal shiftwidth=8 softtabstop=8 tabstop=8 noexpandtab
+autocmd FileType python         setlocal shiftwidth=4 softtabstop=4 expandtab
+autocmd FileType html           setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType javascript     setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType css            setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType yaml           setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=100
+autocmd FileType markdown       setlocal shiftwidth=2 softtabstop=2 noexpandtab textwidth=100
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Format the status line
+" Uncomment if you don't want to use lightline
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Utilities
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" quickfix window full width
+:autocmd FileType qf wincmd J
+
+" Support listchars
+nmap <leader>lc :set invlist<cr>
+
+" Highlight trailing whitespaces and spaces before tabs
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:autocmd BufWinEnter * match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Shortcuts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Useful when editing vimrc
+" edit vimrc
+nmap <leader>ev :e $MYVIMRC<cr>
+" reload vimrc
+nmap <leader>lv :so $MYVIMRC<cr>
+
+" Manage paste/normal mode
+" go in paste mode
+nmap <leader>sp :set paste<cr>
+" go in normal mode
+nmap <leader>sn :set nopaste<cr>
+
+" Navigate quickfix list with ease
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+
+" Buffer tools
+" use:
+" - [b for previous buffer
+" - ]b for next buffer
+" - [B for first buffer
+" - ]B for last buffer
+nmap <leader>bl :ls<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins Install
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+
+Plug 'tpope/vim-sensible' " Provide sensible vim configurations
+
+" Make Pretty
+Plug 'rafi/awesome-vim-colorschemes'
+" Many more, see: https://vim.page/best-vim-themes-color-schemes
+Plug 'itchyny/lightline.vim' " pretty status line
+
+" Musts
+" Ale - autocompletion
+Plug 'dense-analysis/ale'
+
+" Fugitive - git management
+Plug 'tpope/vim-fugitive'
+
+" Nerdtree - file explorer
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+
+ " Ctrlp - open files using <ctrl>+p
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Used for fuzzy searching
+Plug 'mileszs/ack.vim'
+"
+ " Tagbar to view class outline
+Plug 'preservim/tagbar'
+
+" Language specific
+Plug 'mfukar/robotframework-vim' " Syntax highlighting for robot
+
+" Nice to have
+Plug 'junegunn/vim-easy-align' " align on specific character - nice in vhdl
+Plug 'tpope/vim-surround' " Surround selection - go read the doc, it's really good!
+Plug 'airblade/vim-gitgutter' " Shows current changed lines
+Plug 'tpope/vim-repeat' " repeat plugin maps
+Plug 'tpope/vim-unimpaired' " various [ ] commands, see :help unimpaired
+Plug 'tpope/vim-commentary' " Utilities to coment sections of code
+Plug 'mhinz/vim-startify' " Nice start page for vim
+Plug 'ludovicchabant/vim-gutentags' " Manage tags
+Plug 'mbbill/undotree' " Allow to navigate in the undo tree
+Plug 'bling/vim-bufferline' " Show the current open buffers
+Plug 'mengelbrecht/lightline-bufferline' " also add a buffer line
+
+call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>pi :PlugInstall<cr>
+map <leader>pu :PlugUpdate<cr>
+map <leader>ps :PlugSnapshot<cr>
+map <leader>pd :PlugDiff<cr>
+map <leader>pd :PlugClean<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - Configure colorscheme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" See: https://github.com/rafi/awesome-vim-colorschemes#color-schemes for a list of options
+" you can use `:color <tab>` to go through available schemes 😉
+colorscheme blue
+let g:one_allow_italics = 1  " If terminal support italic, it's pretty nice
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - Configure lightline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {
+\   'colorscheme': 'blue',
+\   'active': {
+\     'left': [ [ 'mode', 'paste' ],
+\               [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+\   },
+\   'tabline': {
+\     'left': [ ['buffers']  ],
+\     'right': [ ['close']  ]
+\   },
+\   'component_expand': {
+\     'buffers': 'lightline#bufferline#buffers'
+\   },
+\   'component_type': {
+\     'buffers': 'tabsel'
+\   },
+\   'component_function': {
+\     'gitbranch': 'FugitiveHead'
+\   },
+\   'separator': { 'left': ' ', 'right': ' ' },
+\   'subseparator': { 'left': ' ', 'right': ' ' }
+\ }
+
+let g:lightline#bufferline#show_number=2
+let g:lightline#bufferline#clickable=1
+let g:lightline.component_raw = {'buffers': 1}
+
+let g:bufferline_echo = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - Ale (syntax checker and linter)
+"
+" For python: pip install python-lsp-server
+" For rust, see: https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
+" For robot: pip install robotframework-robocop
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters = {
+\   'python': ['pylsp'],
+\   'robot': ['robocop'],
+\   'c': [],
+\}
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['autopep8'],
+\}
+" extra fixers
+"\   'python': ['isort', 'autopep8'],
+
+" Disabling highlighting
+let g:ale_set_highlights = 1
+
+" Only run linting when saving the file
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_insert_leave = 1
+let g:ale_fix_on_save = 1
+
+let g:ale_completion_enabled = 1
+
+let g:ale_python_auto_virtualenv = 1
+
+" Show errors in the preview window, but exit on inert
+let g:ale_cursor_detail = 1
+let g:ale_close_preview_on_insert = 1
+
+let g:ale_rust_analyzer_executable='/home/lal/.local/bin/rust-analyzer'
+
+"""" Mappings """"
+" Find definition of a keyword
+nmap gd :ALEGoToDefinition<cr>
+" Find references to a keyword
+nmap gr :ALEFindReferences<cr>
+" provide information on the keyword
+nmap gh :ALEHover<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - Nerd Tree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDTreeWinPos = "right"
+let NERDTreeShowHidden=0
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let g:NERDTreeWinSize=35
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - Easy Align
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+ xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+ nmap ga <Plug>(EasyAlign)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - gitgutter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - ack.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
+
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+
+" Maps <leader>/ so we're ready to type the search keyword
+nnoremap <Leader>g :Ack!<Space>
+nnoremap <Leader>/ :Ack!<Space>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>tc :TagbarCurrentTag<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" - Undotree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>ut :UndotreeToggle<CR>
+
+let g:undotree_WindowLayout = 2
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Misk
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Credit joshdick
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+" Keep the vim undo
+if has("persistent_undo")
+   let target_path = expand('~/.undodir')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+endif
+
