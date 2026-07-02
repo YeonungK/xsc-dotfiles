@@ -19,10 +19,14 @@ DOTFILES="${ROOT_DIR}/dotfiles/"
 # Vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+rm -f ~/.vimrc
 ln -s "${DOTFILES}/vimrc" "${HOME}/.vimrc"
 
 # Tmux
+rm -f ~/.tmux.conf
 ln -s "${DOTFILES}/tmux.conf" "${HOME}/.tmux.conf"
 
 # Bashrc
+rm -f ~/.bashrc
 ln -s "${DOTFILES}/bashrc" "${HOME}/.bashrc"
