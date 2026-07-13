@@ -171,6 +171,7 @@ Plug 'ludovicchabant/vim-gutentags' " Manage tags
 Plug 'mbbill/undotree' " Allow to navigate in the undo tree
 Plug 'bling/vim-bufferline' " Show the current open buffers
 Plug 'mengelbrecht/lightline-bufferline' " also add a buffer line
+Plug 'tyrannicaltoucan/vim-deep-space' " vim-deep-space colour scheme
 
 call plug#end()
 
@@ -192,35 +193,41 @@ map <leader>pd :PlugClean<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " See: https://github.com/rafi/awesome-vim-colorschemes#color-schemes for a list of options
 " you can use `:color <tab>` to go through available schemes 😉
-colorscheme blue
+set background=dark
+set termguicolors
+colorscheme deep-space
 let g:one_allow_italics = 1  " If terminal support italic, it's pretty nice
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " - Configure lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-\   'colorscheme': 'blue',
-\   'active': {
-\     'left': [ [ 'mode', 'paste' ],
-\               [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-\   },
-\   'tabline': {
-\     'left': [ ['buffers']  ],
-\     'right': [ ['close']  ]
-\   },
-\   'component_expand': {
-\     'buffers': 'lightline#bufferline#buffers'
-\   },
-\   'component_type': {
-\     'buffers': 'tabsel'
-\   },
-\   'component_function': {
-\     'gitbranch': 'FugitiveHead'
-\   },
-\   'separator': { 'left': ' ', 'right': ' ' },
-\   'subseparator': { 'left': ' ', 'right': ' ' }
-\ }
+" let g:lightline = {
+" \   'colorscheme': 'blue',
+" \   'active': {
+" \     'left': [ [ 'mode', 'paste' ],
+" \               [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+" \   },
+" \   'tabline': {
+" \     'left': [ ['buffers']  ],
+" \     'right': [ ['close']  ]
+" \   },
+" \   'component_expand': {
+" \     'buffers': 'lightline#bufferline#buffers'
+" \   },
+" \   'component_type': {
+" \     'buffers': 'tabsel'
+" \   },
+" \   'component_function': {
+" \     'gitbranch': 'FugitiveHead'
+" \   },
+" \   'separator': { 'left': ' ', 'right': ' ' },
+" \   'subseparator': { 'left': ' ', 'right': ' ' }
+" \ }
 
+let g:airline_theme='deep_space'
+let g:lightline = {
+      \ 'colorscheme': 'deepspace',
+      \ }
 let g:lightline#bufferline#show_number=2
 let g:lightline#bufferline#clickable=1
 let g:lightline.component_raw = {'buffers': 1}
@@ -371,4 +378,3 @@ if has("persistent_undo")
     let &undodir=target_path
     set undofile
 endif
-
